@@ -7,6 +7,7 @@ import ConvoIcon from '~/components/Endpoints/ConvoIcon';
 import { BirthdayIcon } from '~/components/svg';
 import { getIconEndpoint, cn } from '~/utils';
 import { useLocalize } from '~/hooks';
+import ReactMarkdown from 'react-markdown';
 
 export default function Landing({ Header }: { Header?: ReactNode }) {
   const { conversation } = useChatContext();
@@ -38,6 +39,22 @@ export default function Landing({ Header }: { Header?: ReactNode }) {
 
   const containerClassName =
     'shadow-stroke relative flex h-full items-center justify-center rounded-full bg-white text-black';
+
+  const asMarkdown = (content) => (
+    <ReactMarkdown
+      components={{
+        a: (props) => {
+          const { ['node']: _, href, ...otherProps } = props;
+          return (
+            <a className="underline" href={href} target="_blank" rel="noreferrer" {...otherProps} />
+          );
+        },
+        p: ({ node, ...props }) => <span {...props} />,
+      }}
+    >
+      {content}
+    </ReactMarkdown>
+  );
 
   return (
     <TooltipProvider delayDuration={50}>
@@ -72,7 +89,7 @@ export default function Landing({ Header }: { Header?: ReactNode }) {
                   {assistantName}
                 </div>
                 <div className="text-token-text-secondary max-w-md text-center text-xl font-normal ">
-                  {assistantDesc ? assistantDesc : localize('com_nav_welcome_message')}
+                  {assistantDesc ? asMarkdown(assistantDesc) : localize('com_nav_welcome_message')}
                 </div>
                 {/* <div className="mt-1 flex items-center gap-1 text-token-text-tertiary">
               <div className="text-sm text-token-text-tertiary">By Daniel Avila</div>
@@ -81,8 +98,12 @@ export default function Landing({ Header }: { Header?: ReactNode }) {
             ) : (
               <h2 className="mb-5 max-w-[75vh] px-12 text-center text-lg font-medium dark:text-white md:px-0 md:text-2xl">
                 {isAssistant
-                  ? conversation?.greeting ?? localize('com_nav_welcome_assistant')
-                  : conversation?.greeting ?? localize('com_nav_welcome_message')}
+                  ? conversation?.greeting
+                    ? asMarkdown(conversation.greeting)
+                    : localize('com_nav_welcome_assistant')
+                  : conversation?.greeting
+                    ? asMarkdown(conversation.greeting)
+                    : localize('com_nav_welcome_message')}
               </h2>
             )}
           </div>
