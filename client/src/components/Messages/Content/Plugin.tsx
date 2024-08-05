@@ -98,12 +98,12 @@ const Plugin: React.FC<PluginProps> = ({ plugin }) => {
                   </div>
                 </div>
                 {plugin.loading && <Spinner className="ml-1 text-black" />}
-                <DisclosureButton className="ml-12 flex items-center gap-2">
+                {/* <DisclosureButton className="ml-12 flex items-center gap-2">
                   <ChevronDownIcon {...iconProps} />
-                </DisclosureButton>
+                </DisclosureButton> */}
               </div>
 
-              <DisclosurePanel className="mt-3 flex max-w-full flex-col gap-3">
+              {/* <DisclosurePanel className="mt-3 flex max-w-full flex-col gap-3">
                 <CodeBlock
                   lang={latestPlugin ? `REQUEST TO ${latestPlugin?.toUpperCase()}` : 'REQUEST'}
                   codeChildren={formatInputs(plugin.inputs ?? [])}
@@ -120,7 +120,7 @@ const Plugin: React.FC<PluginProps> = ({ plugin }) => {
                     classProp="max-h-[450px]"
                   />
                 )}
-              </DisclosurePanel>
+              </Disclosure.Panel> */}
             </>
           );
         }}
