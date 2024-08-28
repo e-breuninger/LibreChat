@@ -97,7 +97,7 @@ export default function Landing({ Header }: { Header?: ReactNode }) {
             </div> */}
               </div>
             ) : (
-              <h2 className="mb-5 max-w-[75vh] px-12 text-center text-lg font-medium dark:text-white md:px-0 md:text-2xl">
+              <div className="mb-5 max-w-[75vh] px-12 text-center text-lg font-medium dark:text-white md:px-0 md:text-2xl">
                 {isAssistant
                   ? conversation?.greeting
                     ? asMarkdown(conversation.greeting)
@@ -105,7 +105,7 @@ export default function Landing({ Header }: { Header?: ReactNode }) {
                   : conversation?.greeting
                     ? asMarkdown(conversation.greeting)
                     : localize('com_nav_welcome_message')}
-              </h2>
+              </div>
             )}
           </div>
         </div>
