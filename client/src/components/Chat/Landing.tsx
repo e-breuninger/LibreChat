@@ -46,10 +46,11 @@ export default function Landing({ Header }: { Header?: ReactNode }) {
         a: (props) => {
           const { ['node']: _, href, ...otherProps } = props;
           return (
+            // otherProps contains children
+            // eslint-disable-next-line jsx-a11y/anchor-has-content
             <a className="underline" href={href} target="_blank" rel="noreferrer" {...otherProps} />
           );
         },
-        p: ({ node, ...props }) => <span {...props} />,
       }}
     >
       {content}
