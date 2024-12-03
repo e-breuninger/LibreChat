@@ -11,6 +11,24 @@ import { useLocalize, useSubmitMessage } from '~/hooks';
 import { TooltipAnchor } from '~/components/ui';
 import { BirthdayIcon } from '~/components/svg';
 import ConvoStarter from './ConvoStarter';
+import ReactMarkdown from 'react-markdown';
+
+const asMarkdown = (content) => (
+  <ReactMarkdown
+    components={{
+      a: (props) => {
+        const { ['node']: _, href, ...otherProps } = props;
+        return (
+          // otherProps contains children
+          // eslint-disable-next-line jsx-a11y/anchor-has-content
+          <a className="underline" href={href} target="_blank" rel="noreferrer" {...otherProps} />
+        );
+      },
+    }}
+  >
+    {content}
+  </ReactMarkdown>
+);
 
 export default function Landing({ Header }: { Header?: ReactNode }) {
   const { conversation } = useChatContext();
@@ -73,7 +91,7 @@ export default function Landing({ Header }: { Header?: ReactNode }) {
   const getWelcomeMessage = () => {
     const greeting = conversation?.greeting ?? '';
     if (greeting) {
-      return greeting;
+      return asMarkdown(greeting);
     }
 
     if (isAssistant) {
