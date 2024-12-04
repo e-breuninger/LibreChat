@@ -18,7 +18,7 @@ export default function useChatHelpers(index = 0, paramId?: string) {
   const queryClient = useQueryClient();
   const { isAuthenticated } = useAuthContext();
 
-  const { newConversation } = useNewConvo(index);
+  const { newConversation, newDefaultConversation } = useNewConvo(index);
   const { useCreateConversationAtom } = store;
   const { conversation, setConversation } = useCreateConversationAtom(index);
   const { conversationId } = conversation ?? {};
@@ -143,6 +143,7 @@ export default function useChatHelpers(index = 0, paramId?: string) {
 
   return {
     newConversation,
+    newDefaultConversation,
     conversation,
     setConversation,
     // getConvos,

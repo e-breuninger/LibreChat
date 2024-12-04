@@ -262,10 +262,28 @@ const useNewConvo = (index = 0) => {
       mutateAsync,
     ],
   );
+  const newDefaultConversation = useRecoilCallback(() => () => {
+    let preset = defaultPreset;
+    const defaultModelSpec = getDefaultModelSpec(startupConfig?.modelSpecs?.list);
+    if (!preset && defaultModelSpec) {
+      preset = {
+        ...defaultModelSpec.preset,
+        iconURL: getModelSpecIconURL(defaultModelSpec),
+        spec: defaultModelSpec.name,
+      } as TConversation;
+    }
+    return newConversation({ conversation: {}, preset })
+  }, [
+    defaultPreset,
+    startupConfig,
+    switchToConversation,
+  ])
+
 
   return {
     switchToConversation,
     newConversation,
+    newDefaultConversation,
   };
 };
 

@@ -66,7 +66,7 @@ export default function NewChat({
   isSmallScreen: boolean;
 }) {
   /** Note: this component needs an explicit index passed if using more than one */
-  const { newConversation: newConvo } = useNewConvo(index);
+  const { newDefaultConversation: newConvo } = useNewConvo(index);
   const navigate = useNavigate();
   const localize = useLocalize();
 

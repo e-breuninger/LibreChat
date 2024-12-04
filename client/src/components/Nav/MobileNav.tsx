@@ -10,7 +10,7 @@ export default function MobileNav({
   setNavVisible: Dispatch<SetStateAction<boolean>>;
 }) {
   const localize = useLocalize();
-  const { newConversation } = useNewConvo(0);
+  const { newDefaultConversation } = useNewConvo(0);
   const conversation = useRecoilValue(store.conversationByIndex(0));
   const { title = 'New Chat' } = conversation || {};
 
@@ -52,7 +52,7 @@ export default function MobileNav({
         type="button"
         aria-label={localize('com_ui_new_chat')}
         className="m-1 inline-flex size-10 items-center justify-center rounded-full hover:bg-surface-hover"
-        onClick={() => newConversation()}
+        onClick={() => newDefaultConversation()}
       >
         <svg
           width="24"
