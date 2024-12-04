@@ -30,7 +30,7 @@ export default function Footer({ className }: { className?: string }) {
       target={termsOfService.openNewTab === true ? '_blank' : undefined}
       rel="noreferrer"
     >
-      {localize('com_ui_terms_of_service')}
+      {termsOfService.modalTitle ?? localize('com_ui_terms_of_service')}
     </a>
   );
 
